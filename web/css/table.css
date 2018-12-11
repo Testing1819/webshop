@@ -1,0 +1,42 @@
+table {
+    border-collapse:collapse;
+    width: 100%;
+}
+
+td, th {
+    padding: 10px;
+}
+
+th {
+    border-right: 1px solid white;
+    background-color: grey;
+    color: white;
+}
+
+tr:nth-child(odd) td {
+    background-color: rgb(230, 230, 230);
+}
+
+tr:nth-child(even) td {
+    background-color: white;
+}
+
+td {
+    text-align: center;
+    max-width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+button {
+    padding: 5px;
+    border-radius: 3px;
+    background-color: steelblue;
+    color: white;
+}
+
+input[type="number"] {
+    border: 1px solid grey;
+    padding: 5px;
+}

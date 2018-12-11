@@ -1,0 +1,84 @@
+
+div.albumlist {
+    background-color: rgb(250, 250, 250);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+div.album_wide {
+    background-color: rgb(240, 240, 240);
+    width: 100%;
+    height: 140px;
+    margin-bottom: 5px;
+    color: #222;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+div.album_wide > div {
+    position: relative;
+    margin-right: 25px;
+    padding-left: 10px;
+    min-width: 160px;
+}
+
+div.album_wide > p {
+    padding: 15px;
+    padding-right: 40px;
+    font-size: 0.95em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 92px;
+    color: #444;
+}
+
+div.album_wide > a {
+    max-height: 140px;
+    max-width: 140px;
+}
+
+div.album_wide img {
+    float: left;
+    height: 100%;
+    object-fit: fill;
+    margin-right: 10px;
+}
+
+div.album_wide > div > h3 {
+    padding-top: 10px;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+div.album_wide > div > h4 {
+    font-size: 1.25em;
+}
+
+div.album_wide > div > div.buttons {
+    position: absolute;
+    bottom: 15px;
+}
+
+div.album_wide > div > div.buttons > div.button {
+    background-color: steelblue;
+    padding: 5px;
+    color: white;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+div.album_wide > div > div.buttons > div.button:hover {
+    background: darkslategray;
+    color: white;
+    cursor: pointer;
+}
+
+div.button > span.type {
+    text-align: left;
+}
+
+div.button > span.price {
+    margin-left: 15px;
+}

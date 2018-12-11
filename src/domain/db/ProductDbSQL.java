@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ProductDbSQL extends DbSQL<Product> {
+public class ProductDbSQL extends DbSQL {
 
     public ProductDbSQL(Properties properties) throws SQLException {
         super(properties, "product");
@@ -23,11 +23,14 @@ public class ProductDbSQL extends DbSQL<Product> {
             ResultSet result = statement.executeQuery();
             result.next();
 
-            String name = result.getString("name");
+            String title = result.getString("title");
             String description = result.getString("description");
             double price = result.getDouble("price");
+            String type = result.getString("type");
+            String genre = result.getString("genre");
+            String artist = result.getString("artist");
 
-            return new Product(id, name, description, price);
+            return new Product(id, title, artist, description, genre, type, price);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -43,10 +46,14 @@ public class ProductDbSQL extends DbSQL<Product> {
 
             while (result.next()) {
                 int id = result.getInt("id");
-                String name = result.getString("name");
+                String title = result.getString("title");
                 String description = result.getString("description");
                 double price = result.getDouble("price");
-                persons.add(new Product(id, name, description, price));
+                String type = result.getString("type");
+                String genre = result.getString("genre");
+                String artist = result.getString("artist");
+
+                persons.add(new Product(id, title, artist, description, genre, type, price));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,21 +61,88 @@ public class ProductDbSQL extends DbSQL<Product> {
         return persons;
     }
 
-    public void add(Product person) {
+    public void add(Product product) {
         try {
-            String sql = "INSERT INTO product VALUES (?,?,?,?)";
+            String sql = "INSERT INTO product VALUES (?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, person.getId());
-            statement.setString(2, person.getName());
-            statement.setString(3, person.getDescription());
-            statement.setDouble(4, person.getPrice());
+            statement.setInt(1, product.getId());
+            statement.setString(2, product.getTitle());
+            statement.setString(3, product.getDescription());
+            statement.setDouble(4, product.getPrice());
+            statement.setString(5, product.getType());
+            statement.setString(6, product.getGenre());
+            statement.setString(7, product.getArtist());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void update(Product person) {
-        //
+    public void update(Product product) {
+        try {
+            String sql = "UPDATE " + tableName + " SET username=?, email=?, password=?, firstName=?, lastName=?, role=? WHERE username=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, product.getId());
+            statement.setString(2, product.getTitle());
+            statement.setString(3, product.getDescription());
+            statement.setDouble(4, product.getPrice());
+            statement.setString(5, product.getType());
+            statement.setString(6, product.getGenre());
+            statement.setString(7, product.getArtist());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id) {
+        try {
+            String sql = "DELETE FROM product WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean contains(int id) {
+        try {
+            String sql = "SELECT COUNT(1) FROM " + tableName + " WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            result.next();
+            return result.getInt(1)==1;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public List<Product> getN(int amount) {
+        List<Product> persons = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM product LIMIT ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, amount);
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                int id = result.getInt("id");
+                String title = result.getString("title");
+                String description = result.getString("description");
+                double price = result.getDouble("price");
+                String type = result.getString("type");
+                String genre = result.getString("genre");
+                String artist = result.getString("artist");
+
+                persons.add(new Product(id, title, artist, description, genre, type, price));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return persons;
     }
 }

@@ -6,8 +6,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta charset="UTF-8">
-<title>Sign Up</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<title>Add product</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/forms.css">
 </head>
 <body>
 <div id="container">
@@ -15,6 +17,9 @@
     <%@include file="header.jsp"%>
 
     <main>
+
+        <%@include file="errormessage.jsp"%>
+
         <c:choose>
             <c:when test="${pageType eq 'CREATE'}">
                 <h2>Add product</h2>
@@ -24,42 +29,30 @@
             </c:when>
         </c:choose>
 
-
-        <c:if test="${errors != null && !errors.isEmpty()}">
-            <div class="alert-danger">
-                <ul>
-                <c:forEach items="${errors}" var="error">
-                    <li>${error}</li>
-                </c:forEach>
-                </ul>
-            </div>
-        </c:if>
-
         <c:choose>
             <c:when test="${pageType eq 'UPDATE'}">
-                <c:set var="controllerUrl" value = "modifyProduct&id=${product.productId}"/>
+                <c:set var="controllerUrl" value = "product.modify&id=${product.id}"/>
                 <c:set var="buttonText" value = "Update product"/>
             </c:when>
             <c:when test="${pageType eq 'CREATE'}">
-                <c:set var="controllerUrl" value = "addProduct"/>
+                <c:set var="controllerUrl" value = "product.add"/>
                 <c:set var="buttonText" value = "Add product"/>
             </c:when>
         </c:choose>
 
-        <form method="post" action="Controller?action=${controllerUrl}" novalidate="novalidate">
+        <form method="post" action="Controller?handler=${controllerUrl}" novalidate="novalidate">
             <!-- novalidate in order to be able to run tests correctly -->
-            <p><label for="name">Name</label><input type="text" id="name" name="name"
-             required value="<c:out value="${product.name}" />"> </p>
-            <p><label for="description">Description</label><input type="text" id="description" name="description"
-             required value="<c:out value="${product.description}" />"> </p>
-            <p><label for="price">Price</label><input type="text" id="price" name="price"
-             required value="<c:out value="${product.price}" />"> </p>
-            <p><input type="submit" id="addProduct" value="${buttonText}"></p>
+            <input type="text" id="title" name="title" placeholder="Title" value="<c:out value="${product.title}" />">
+            <input type="text" id="artist" name="artist" placeholder="Artist" value="<c:out value="${product.artist}" />">
+            <input type="text" id="description" name="description" placeholder="Description" value="<c:out value="${product.description}" />">
+            <input type="text" id="type" name="type" placeholder="Type" required value="<c:out value="${product.type}" />">
+            <input type="text" id="genre" name="genre" placeholder="Genre" value="<c:out value="${product.genre}" />">
+            <input type="text" id="price" name="price" placeholder="Price" value="<c:out value="${product.price}" />">
+            <input type="submit" id="addProduct" value="${buttonText}">
 
         </form>
     </main>
 <footer>
-&copy; Webontwikkeling 3, UC Leuven-Limburg
 </footer>
 </div>
 </body>

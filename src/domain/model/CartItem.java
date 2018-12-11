@@ -4,8 +4,8 @@ public class CartItem extends Product {
 
     private Integer amount = 0;
 
-    public CartItem(String name, String description, double price, int amount) {
-        super(0, name, description, price);
+    public CartItem(String title, String artist, String type, String genre, String description, double d, int amount) {
+        super(0, title, artist, type, genre, description, d);
         this.amount = amount;
     }
 

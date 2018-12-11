@@ -1,15 +1,35 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header>
-    <h1>
-        <span>Web shop</span>
-    </h1>
+    <div>
+        <img src="img/logo.png" width="250px">
+        <ul class="login">
+            <c:if test="${empty user}">
+                <li><a href="Controller?handler=user.login" id="account">Log in</a></li>
+                <li><a href="Controller?handler=basket.overview" id="basket">Basket</a></li>
+            </c:if>
+            <c:if test="${user.role=='CUSTOMER' }">
+                <li><a href="Controller?handler=user.login" id="account"><c:out value="${user.username}"/></a></li>
+                <li><a href="Controller?handler=basket.overview" id="basket">Basket</a></li>
+                <li><a href="Controller?handler=order.history" id="orderhistory">Order history</a></li>
+            </c:if>
+            <c:if test="${user.role=='ADMIN' }">
+                <li><a href="Controller?handler=user.login" id="account"><c:out value="${user.username} (Admin)"/></a></li>
+                <li><a href="Controller?handler=basket.overview" id="basket">Basket</a></li>
+                <li><a href="Controller?handler=order.history" id="orderhistory">Order history</a></li>
+            </c:if>
+        </ul>
+    </div>
     <nav>
         <ul>
-            <li id="${pageContext.request.requestURI eq '/index.jsp' ? 'actual' : ''}"><a href="Controller">Home</a></li>
-            <li id="${pageContext.request.requestURI eq '/shoppingcart.jsp' ? 'actual' : ''}"><a href="Controller?action=shoppingCartView">Shopping Cart</a></li>
-            <li id="${pageContext.request.requestURI eq '/personoverview.jsp' ? 'actual' : ''}"><a href="Controller?action=userOverview">Users</a></li>
-            <li id="${pageContext.request.requestURI eq '/productoverview.jsp' ? 'actual' : ''}"><a href="Controller?action=productOverview">Products</a></li>
-            <li id="${pageContext.request.requestURI eq '/productform.jsp' ? 'actual' : ''}"><a href="Controller?action=addProduct">Add product</a></li>
-            <li id="${pageContext.request.requestURI eq '/signUp.jsp' ? 'actual' : ''}"><a href="Controller?action=signUp">Sign up</a></li>
+            <li><a href="Controller?handler=home">Home</a></li>
+            <li><a href="Controller?handler=product.catalogue">Catalogue</a></li>
+            <c:if test="${user.role=='ADMIN' }">
+                <li><a href="Controller?handler=product.overview">Manage products</a></li>
+                <li><a href="Controller?handler=product.add">Add product</a></li>
+                <li><a href="Controller?handler=user.overview">Manage users</a></li>
+
+            </c:if>
 
         </ul>
     </nav>

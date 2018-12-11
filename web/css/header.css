@@ -1,0 +1,81 @@
+header h1 {
+    text-transform: lowercase;
+    font-weight: bold;
+}
+
+header {
+}
+
+header > div > img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+header nav {
+    background-color: rgb(42, 43, 48);
+    color: white;
+    padding: 15px;
+    text-transform: uppercase;
+    height: 22px;
+}
+
+header nav ul {
+    list-style: none;
+    max-width: 1400px;
+    margin: auto;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 0.85em;
+}
+
+header nav ul li:hover {
+    border-bottom: 2px solid white;
+}
+
+header ul.login li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+header > div:first-child {
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    max-width: 1400px;
+    margin: auto;
+}
+
+/* Show icon next to basket link */
+a#basket {
+    margin: 0px;
+    padding-left: 25px;
+    background-image: url('../img/basket.png');
+    background-repeat: no-repeat;
+    width: 30px; 
+    background-size: contain;
+}
+
+/* Show icon next to account link */
+a#account {
+    margin: 0px;
+    padding-left: 25px;
+    background-image: url('../img/account.png');
+    background-repeat: no-repeat;
+    width: 30px; 
+    background-size: contain;
+}
+
+/* Show icon next to order history link */
+a#orderhistory {
+    margin: 0px;
+    padding-left: 25px;
+    background-image: url('../img/list.png');
+    background-repeat: no-repeat;
+    width: 30px;
+    background-size: contain;
+}

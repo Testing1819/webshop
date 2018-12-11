@@ -1,0 +1,62 @@
+div.albumview {
+
+}
+
+main div.albumview {
+    background-color: rgb(240, 240, 240);
+    margin-bottom: 10px;
+    max-height: 400px;
+    position: relative;
+    margin-top: 10px;
+    padding-right: 90px;
+}
+
+div.albumview img {
+    height: 400px;
+}
+
+div.albumview > div {
+    position: absolute;
+    display: inline-block;
+    margin: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+    color: #333333;
+}
+
+div.albumview div h2 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+div.albumview div h3 {
+    font-size: 1.75em;
+    font-weight: normal;
+}
+
+div.albumview div p {
+    font-size: 1.1em;
+    font-weight: normal;
+    margin-top: 10px;
+    overflow: hidden;
+    max-height: 180px;
+}
+
+div.albumview div div.buttons {
+    margin-top: 20px;
+    min-width: 180px;
+}
+
+div.albumview div div.buttons div.button {
+    background-color: steelblue;
+    padding: 5px;
+    color: white;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+div.albumview div div.buttons div.button:hover {
+    background: darkslategray;
+    color: white;
+    cursor: pointer;
+}

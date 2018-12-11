@@ -5,12 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta charset="UTF-8">
 <title>Overview</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/table.css">
 </head>
 <body>
 <div id="container">
     <%@include file="header.jsp"%>
     <main>
+
+        <%@include file="errormessage.jsp"%>
+
         <h2>User overview</h2>
         <script>
             function getBaseUrl() {
@@ -19,39 +24,38 @@
 
             function confirmDelete(userId) {
                 if (confirm("Are you sure you want to delete the user?")) {
-                    url = getBaseUrl() + '?action=deleteUser&id=' + userId;
+                    url = getBaseUrl() + '?handler=user.delete&id=' + userId;
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.onreadystatechange = xmlHttp.onreadystatechange = setTimeout(function() {
-                        window.location.href = getBaseUrl() + '?action=userOverview';
+                        window.location.href = getBaseUrl() + '?handler=user.overview';
                     },500);
-                    xmlHttp.open("GET", url, true); // true for asynchronous
+                    xmlHttp.open("DELETE", url, true); // true for asynchronous
                     xmlHttp.send(null);
                 }
             }
         </script>
 <table>
 <tr>
+<th>Username</th>
 <th>E-mail</th>
 <th>First Name</th>
 <th>Last Name</th>
     <th>Delete</th>
-    <th>Check password</th>
 </tr>
+
 <c:forEach items="${users}" var="user">
     <tr>
+        <td><c:out value="${user.username}" /></td>
         <td><c:out value="${user.email}" /></td>
         <td><c:out value="${user.firstName}" /></td>
         <td><c:out value="${user.lastName}" /></td>
-        <td> <button onclick="confirmDelete('${user.id}')">Delete user</button> </td>
-        <td><a href="Controller?action=checkPassword&user=${user.id}">Check</a></td>
+        <td> <button onclick="confirmDelete('${user.username}')">Delete user</button> </td>
     </tr>
 </c:forEach>
 
-<caption>Users Overview</caption>
 </table>
 </main>
 <footer>
-&copy; Webontwikkeling 3, UC Leuven-Limburg
 </footer>
 </div>
 </body>

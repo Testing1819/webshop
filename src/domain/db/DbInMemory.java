@@ -1,7 +1,6 @@
 package domain.db;
 
 import domain.model.DatabaseModel;
-import domain.model.Person;
 
 import java.util.ArrayList;
 import java.util.HashMap;

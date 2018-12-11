@@ -16,7 +16,7 @@ public class ShoppingCart {
         for (Integer productId : amounts.keySet()) {
             Product product = products.get(productId);
             int amount = amounts.get(productId);
-            CartItem item = new CartItem(product.getName(), product.getDescription(), product.getPrice(), amount);
+            CartItem item = new CartItem(product.getTitle(), product.getArtist(), product.getType(), product.getGenre(), product.getDescription(), product.getPrice(), amount);
             cartItems.add(item);
         }
 
@@ -28,4 +28,16 @@ public class ShoppingCart {
         products.put(product.getId(), product);
     }
 
+    public void change(int productId, int amount) {
+        amounts.put(productId, amount);
+    }
+
+    public void remove(int productId) {
+        products.remove(productId);
+        amounts.remove(productId);
+    }
+
+    public int nrOfItems() {
+        return products.size();
+    }
 }

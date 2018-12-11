@@ -10,22 +10,33 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Person extends DatabaseModel {
-	private String id;
+public class User extends DatabaseModel {
+	private String username;
 	private String email;
 	private String password;
 	private String firstName;
 	private String lastName;
 
-	public Person(Integer userid, String email, String password, String firstName, String lastName) {
-		setId(userid);
+	private Role role;
+
+	public User(String username, String email, String password, String firstName, String lastName, Role role) {
+		setUsername(username);
 		setEmail(email);
 		setPassword(password);
 		setFirstName(firstName);
 		setLastName(lastName);
+		setRole(role);
 	}
 	
-	public Person() {
+	public User() {
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername (String username) {
+		this.username = username;
 	}
 
 	public void setEmail(String email) {
@@ -51,13 +62,6 @@ public class Person extends DatabaseModel {
 	
 	public String getPassword() {
 		return password;
-	}
-	
-	public boolean isCorrectPassword(String password) {
-		if(password.isEmpty()){
-			throw new IllegalArgumentException("No password given");
-		}
-		return getPassword().equals(password);
 	}
 
 	public void setPassword(String hashedPassword) {
@@ -114,9 +118,20 @@ public class Person extends DatabaseModel {
 		}
 		this.lastName = lastName;
 	}
+
+	public String getRole() {
+		return this.role.name();
+	}
+
+    public void setRole(String role) {
+        this.role = Role.valueOf(role);
+    }
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	
 	@Override
 	public String toString(){
-		return getFirstName() + " " + getLastName() + ": " + getId() + ", " + getEmail();
+		return getFirstName() + " " + getLastName() + ": " + getUsername() + ", " + getEmail() + ", " + getRole();
 	}	
 }
